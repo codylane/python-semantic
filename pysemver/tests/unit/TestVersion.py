@@ -76,7 +76,100 @@ class TestVersion():
         except semantic.InvalidVersion as e:
             actual_msg = str(e)
 
-            nt.eq_(actual_msg, 'Invalid version {0} must be numeric'.format(invalid_version))
+            exp_msg = 'Invalid version {0} must be numeric'.format(
+                invalid_version
+            )
 
+            nt.eq_(actual_msg, exp_msg)
+
+            # we raise InvalidVersion so that we get this test to pass since
+            # we expect this test to raise InvalidVersion
             raise
 
+    def test_major_property(self):
+        assert False, 'To implement'
+
+    def test_minor_propery(self):
+        assert False, 'To implement'
+
+    def test_patch_propert(self):
+        assert False, 'To implement'
+
+    @parameterized.expand([
+        '1',
+        '1.0',
+        '1.2.0',
+    ])
+    def test_maj_min_patch_returns_tuple(self):
+        assert False, 'To implement'
+
+    @parameterized.expand([
+        '',
+        'a.b.c',
+    ])
+    @nt.raises(semantic.InvalidVersion)
+    def test_maj_min_patch_returns_raises_InvalidVersion(self, invalid_version):
+        assert False, 'To implement'
+
+    def test_to_list_returns_list(self):
+        assert False, 'To implement'
+
+    def test__gt__invokes_compare_helper(self, mocked_method):
+        assert False, 'To implement'
+
+    def test__gt__returns_True(self):
+        assert False, 'To implement'
+
+    def test__gt__returns_False(self):
+        assert False, 'To implement'
+
+    def test__ge__invokes_compare_helper(self, mocked_method):
+        assert False, 'To implement'
+
+    def test__ge__returns_True(self):
+        assert False, 'To implement'
+
+    def test__ge__returns_False(self):
+        assert False, 'To implement'
+
+    def test__lt__invokes_compare_helper(self, mocked_method):
+        assert False, 'To implement'
+
+    def test__lt__returns_True(self):
+        assert False, 'To implement'
+
+    def test__lt__returns_False(self):
+        assert False, 'To implement'
+
+    def test__le__invokes_compare_helper(self, mocked_method):
+        assert False, 'To implement'
+
+    def test__le__returns_True(self):
+        assert False, 'To implement'
+
+    def test__le__returns_False(self):
+        assert False, 'To implement'
+
+    def test__eq__invokes_compare_helper(self, mocked_method):
+        assert False, 'To implement'
+
+    def test__eq__returns_True(self):
+        assert False, 'To implement'
+
+    def test__eq__returns_False(self):
+        assert False, 'To implement'
+
+    def test__ne__invokes_compare_helper(self, mocked_method):
+        assert False, 'To implement'
+
+    def test__ne__returns_True(self):
+        assert False, 'To implement'
+
+    def test__ne__returns_False(self):
+        assert False, 'To implement'
+
+    def test_compare_helper_returns_True(self):
+        assert False, 'To implement'
+
+    def test_compare_helper_returns_False(self):
+        assert False, 'To implement'
