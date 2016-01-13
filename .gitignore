@@ -1,1 +1,5 @@
+# ignore python binary files
 *.pyc
+
+# ignore coverage reports
+.coverage
