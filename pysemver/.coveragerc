@@ -1,0 +1,11 @@
+[run]
+branch = True
+omit =
+  */tests/*
+  *encodings/latin_1.py
+
+[report]
+omit =
+  */tests/*
+  */encodings/latin_1.py
+show_missing = True
