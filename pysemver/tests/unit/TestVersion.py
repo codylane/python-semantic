@@ -86,17 +86,23 @@ class TestVersion():
             # we expect this test to raise InvalidVersion
             raise
 
-    @nt.nottest
-    def test_major_property(self):
-        assert False, 'To implement'
+    def test_major_property_returns_int(self):
+        inst = semantic.Version('2016.01.18')
 
-    @nt.nottest
-    def test_minor_propery(self):
-        assert False, 'To implement'
+        nt.eq_(inst.major, 2016)
+        nt.assert_is_instance(inst.major, int)
 
-    @nt.nottest
-    def test_patch_propert(self):
-        assert False, 'To implement'
+    def test_minor_propery_returns_int(self):
+        inst = semantic.Version('1.2.3')
+
+        nt.eq_(inst.minor, 2)
+        nt.assert_is_instance(inst.minor, int)
+
+    def test_patch_property_returns_init(self):
+        inst = semantic.Version('4.5.6')
+
+        nt.eq_(inst.patch, 6)
+        nt.assert_is_instance(inst.patch, int)
 
     @parameterized.expand([
         '1',
