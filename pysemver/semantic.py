@@ -33,7 +33,12 @@ class Version(object):
 
     def to_maj_min_patch(self, version):
         '''
-        Takes a string like 4.2.3 and converts it to major.minor.version
+        Takes a string like 4.2.3 and converts it to
+        int(major), int(minor), int(version)
+
+        If minor is not provided '0' will be returned for this value.
+
+        If patch is not provided '0' will be returned for this value.
 
         @returns (major, minor, version) integer tuple
         @raises InvalidVersion if the version string is not parsable
