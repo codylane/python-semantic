@@ -43,6 +43,8 @@ class Version(object):
         @returns (major, minor, version) integer tuple
         @raises InvalidVersion if the version string is not parsable
         '''
+        if version.count('.') > 2:
+            raise InvalidVersion('version is invalid')
         mmp_finder = re.compile('(\d+)\.?(\d+)?\.?(\d+)?')
         matcher = mmp_finder.search(version)
         if matcher is None:

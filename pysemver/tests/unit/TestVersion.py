@@ -175,7 +175,15 @@ class TestVersion():
         inst = semantic.Version('4.5.6')
 
         # This is where we expect our invalid version to be raised
-        inst.to_maj_min_patch(invalid_version)
+        try:
+            inst.to_maj_min_patch(invalid_version)
+        except semantic.InvalidVersion as e:
+            expected_err_msgs = [
+                'Invalid version {0} must be numeric'.format(invalid_version),
+                'Invalid version {0} cannot contain more than 2 dots'.format(invalid_version)
+            ]
+            nt.assert_in(str(e), expected_err_msgs)
+            raise
 
 
 
