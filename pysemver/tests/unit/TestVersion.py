@@ -104,6 +104,35 @@ class TestVersion():
         nt.eq_(inst.patch, 6)
         nt.assert_is_instance(inst.patch, int)
 
+    @mock.patch('pysemver.semantic.re.compile',
+                autospec=True
+                )
+    def test_to_maj_min_patch_invokes_re_module_methods(self, mocked_method):
+        '''
+        to_maj_min_patch uses re to return a (major, minor, patch) tuple.
+        * We want to make sure that re.compile is called with arguments
+        * We want to make sure that the the compiled regex method .search
+          is called with a version string.
+        * We want to make sure that matcher.groups() is called and returns
+          a (int, int, int)
+        '''
+        # re.compile('(\d+)\.?(\d+)?\.?(\d+)?').search('1.2.3').groups()
+        mocked_method.return_value.search.return_value.groups.return_value = (1, 2, 3)
+
+        # the Version.__init__ method invokes to_maj_min_patch.
+        inst = semantic.Version('1.2.3')
+
+        # assertion for re.compile('(\d+)\.?(\d+)?\.?(\d+)?')
+        mocked_method.assert_called_once_with('(\d+)\.?(\d+)?\.?(\d+)?')
+
+        # assertion for mmp_find.search('1.2.3')
+        mocked_method.return_value.search.assert_called_once_with('1.2.3')
+
+        # assertion for matcher.groups()
+        mocked_method.return_value.search.return_value.groups.assert_called_once_with()
+
+        nt.eq_(inst.to_maj_min_patch('1.2.3'), (1, 2, 3))
+
     @parameterized.expand([
         '1',
         '1.0',
