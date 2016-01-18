@@ -166,11 +166,18 @@ class TestVersion():
     @parameterized.expand([
         '',
         'a.b.c',
+        '4.5.6.7',
     ])
     @nt.raises(semantic.InvalidVersion)
-    @nt.nottest
-    def test_maj_min_patch_returns_raises_InvalidVersion(self, invalid_version):
-        assert False, 'To implement'
+    def test_to_maj_min_patch_returns_raises_InvalidVersion(self, invalid_version):
+        # yes, this is a valid version, but because our constructor calls
+        # to_maj_min_patch, we require a instance first.
+        inst = semantic.Version('4.5.6')
+
+        # This is where we expect our invalid version to be raised
+        inst.to_maj_min_patch(invalid_version)
+
+
 
     @nt.nottest
     def test_to_list_returns_list(self):
@@ -179,6 +186,7 @@ class TestVersion():
     @nt.nottest
     def test__gt__invokes_compare_helper(self, mocked_method):
         assert False, 'To implement'
+        raise
 
     @nt.nottest
     def test__gt__returns_True(self):
