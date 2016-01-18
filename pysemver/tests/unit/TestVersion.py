@@ -138,9 +138,30 @@ class TestVersion():
         '1.0',
         '1.2.0',
     ])
-    @nt.nottest
-    def test_maj_min_patch_returns_tuple(self):
-        assert False, 'To implement'
+    def test_to_maj_min_patch_returns_tuple(self, version):
+        '''
+        Make an assertion that to_maj_min_patch returns tuple(int, int, int)
+        '''
+        inst = semantic.Version(version)
+
+        if version.count('.') == 0:
+            expected_version = '{0}.0.0'.format(version)
+        elif version.count('.') == 1:
+            expected_version = '{0}.0'.format(version)
+        elif version.count('.') == 2:
+            expected_version = version
+        else:
+            raise semantic.InvalidVersion(
+                'The version "{0}" you specified is an invalid format'.format(version)
+            )
+
+        # convert string to tuple(int, int, int)
+        expected_version = tuple(
+            [int(i) for i in expected_version.split('.', 2)]
+        )
+
+        nt.eq_(inst.to_maj_min_patch(version), expected_version)
+        nt.assert_is_instance(inst.to_maj_min_patch(version), tuple)
 
     @parameterized.expand([
         '',
