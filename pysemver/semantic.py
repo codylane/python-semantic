@@ -44,7 +44,9 @@ class Version(object):
         @raises InvalidVersion if the version string is not parsable
         '''
         if version.count('.') > 2:
-            raise InvalidVersion('version is invalid')
+            raise InvalidVersion(
+                'Invalid version {0} cannot contain more than 2 dots'.format(version)
+            )
         mmp_finder = re.compile('(\d+)\.?(\d+)?\.?(\d+)?')
         matcher = mmp_finder.search(version)
         if matcher is None:
